@@ -21,38 +21,28 @@ public class ReverseLinkedList {
     }
 
     public ListNode reverseList(ListNode head) {
-        ListNode result = null;
-        ListNode tmp;
-        ListNode tmp2;
-        tmp = head.next;
-        tmp2 = tmp.next;
-        tmp.next = head;
+        return reverse(head, null);
+    }
 
-
-
-        return result;
+    private ListNode reverse(ListNode current, ListNode prev){
+        if(current == null){
+            return prev;
+        }
+        ListNode next = current.next;
+        current.next = prev;
+        return reverse(next, current);
     }
 
     public ListNode reverseList2(ListNode head) {
-        if(head == null) return null;
-        if(head.next == null) return head;
-        ListNode result = null;
-        ListNode tmp;
         ListNode current = head;
-        ListNode next = head.next;
-        while (next != null){
-            if(current.next == next){
-                current.next = null;
-            }
-            tmp = next.next;
-            next.next = current;
+        ListNode prev = null;
+        while (current != null){
+            ListNode next = current.next;
+            current.next = prev;
+            prev = current;
             current = next;
-            next = tmp;
-            if(next == null){
-                result = current;
-            }
         }
-        return result;
+        return prev;
     }
 
     public ListNode reverseList3(ListNode head) {
